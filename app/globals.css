@@ -9,3 +9,10 @@
 body{
   background-color: var(--base);
 }
+
+.material:hover {
+  filter: contrast(175%);
+}
+.material:hover > .exebit {
+  transform: rotate(15deg);
+}
