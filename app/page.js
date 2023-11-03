@@ -43,9 +43,9 @@ export default function Home() {
           </section>
         </form> 
       :
-        <div className='flex flex-col justify-center max-w-[800px] p-5'>
+        <div className='flex flex-col opacity-80 justify-center max-w-[800px] p-5'>
           <h1>ERRO!</h1>
-          <p>Não há recursos para efetuar a operação</p>
+          <p>Não há material para efetuar a operação</p>
         </div>
       }
 
