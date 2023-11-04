@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <main className='flex flex-col'>
-      {materials !== {} ? 
+      {/* {materials !== useState({}) ? 
         <form>
           <section id='model' className='flex w-[100%]'>
             <input type='file' className='w-[100%] cursor-pointer'/>
@@ -47,7 +47,7 @@ export default function Home() {
           <h1>ERRO!</h1>
           <p>Não há material para efetuar a operação</p>
         </div>
-      }
+      } */}
 
     </main>
   )
