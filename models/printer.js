@@ -6,7 +6,7 @@ const printerSchema = new Schema(
         name: String,
         image: String,
         bg: String,
-        availability: String
+        availability: String,
     }
 );
 const Printer = mongoose.model.Printer || mongoose.model("Printer", printerSchema);

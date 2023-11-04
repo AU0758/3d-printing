@@ -1,6 +1,6 @@
 import Filement from "@/models/filement";
 import { NextResponse } from "next/server";
-import { connectMongoDB } from "@/libs/mongodb";
+import connectMongoDB from "@/libs/mongodb";
 
 export async function POST(req) {
     const {price, name, image, bg, lenght} = await req.json();
