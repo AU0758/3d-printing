@@ -8,11 +8,21 @@ export async function POST(req) {
     await connectMongoDB();
 
     try {
-        const filament = await Filement.create({ price, name, image, bg, length });
-        console.log("Filament created:", filament);
+        const filaments = await Filement.create({ price, name, image, bg, length });
+        console.log("Filament created:", filaments);
         return NextResponse.json({ message: "Filament created successfully" }, { status: 201 });
     } catch (error) {
         console.error("Error creating filament:", error);
         return NextResponse.json({ message: "Failed to create filament" }, { status: 500 });
+    }
+}
+export async function GET() {
+    try {
+        await connectMongoDB();
+        const filements = await Filement.find();
+        return NextResponse.json({ filements });
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ message: "Failed to get data" }, { status: 500 });
     }
 }

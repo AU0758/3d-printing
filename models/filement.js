@@ -9,6 +9,6 @@ const filementSchema = new Schema(
         lenght: Number,
     }
 );
-const Filement = mongoose.model.Filement;
+const Filement = mongoose.models.Filement||mongoose.model("Filement", filementSchema);
 
 export default Filement;

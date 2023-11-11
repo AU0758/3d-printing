@@ -9,6 +9,6 @@ const printerSchema = new Schema(
         availability: String,
     }
 );
-const Printer = mongoose.model.Printer || mongoose.model("Printer", printerSchema);
+const Printer = mongoose.models.Printer || mongoose.model("Printer", printerSchema);
 
 export default Printer;

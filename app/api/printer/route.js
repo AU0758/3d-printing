@@ -16,3 +16,13 @@ export async function POST(req) {
         return NextResponse.json({ message: "Failed to create Priner" }, { status: 500 });
     }
 }
+export async function GET() {
+    try {
+        await connectMongoDB();
+        const printers = await Printer.find();
+        return NextResponse.json({ printers });
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ message: "Failed to get data" }, { status: 500 });
+    }
+}

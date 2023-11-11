@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "models/filement.js", "libs/mongodb.js"  ],
+, "models/filement.js", "libs/mongodb.js", "app/page.tsx", "components/sections/Filement.js", "components/sections/Printer.jsx"  ],
   "exclude": [
     "node_modules"
   ]
