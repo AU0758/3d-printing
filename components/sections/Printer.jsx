@@ -1,7 +1,10 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
-import { ArrowBigLeft, ArrowBigRight, Circle, CircleDot } from "lucide-react"
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { AiOutlineArrowRight } from 'react-icons/ai';
+import { BsFillCircleFill } from "react-icons/bs"
+import { join } from "path";
 
 const Printer = () => {
   const [printers, setPrinters] = useState([]);
@@ -10,9 +13,13 @@ const Printer = () => {
   useEffect(() => {
     const getPrinter = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/printer', { cache: 'no-store' });
+
+        const res = await fetch('/api/printer', { cache: 'no-store' });
         console.log('Data fetching: %cOK', 'color: green');
         const data = await res.json();
+
+        const path = 'app/tmp/'+data.image
+        
         setPrinters(data.printers);
       } catch (error) {
         console.error('Data fetching: %cFAILED', 'color:red', error);
@@ -24,14 +31,14 @@ const Printer = () => {
 
   function showNextPrinter() {
     setIindex(index => {
-      if (index === images.length - 1) return 0
+      if (index === printers.length - 1) return 0
       return index + 1
     })
   }
 
   function showPrevPrinter() {
     setIindex(index => {
-      if (index === 0) return images.length - 1
+      if (index === 0) return printers.length - 1
       return index - 1
     })
   }
@@ -39,7 +46,8 @@ const Printer = () => {
   return (
     <section
       aria-label="Image Slider"
-      style={{ width: "100%", height: "100%", position: "relative" }}
+      style={{ width: "50vw", height: "calc(100vh - 30px - 2.5rem)", position: "relative" }}
+      
     >
       <a href="#after-image-slider-controls" className="skip-link">
         Skip Image Slider Controls
@@ -47,13 +55,26 @@ const Printer = () => {
       <div
         style={{
           width: "100%",
-          height: "100%",
+          height: "calc(100vh - 30px - 2.5rem)",
           display: "flex",
           overflow: "hidden",
+          placeItems: "center",
+          alignItems: "center"
         }}
       >
         {printers.map(({ name, bg, image, price, availability }, index) => (
-          <p>p</p>
+          <div 
+          aria-hidden={Iindex !== index}
+          className="img-slider-img"
+          style={{ translate: `${-100 * Iindex}%`, backgroundColor: bg}}
+          >
+            <div className='flex items-center justify-center flex-col h-[100%]'>
+              <p className='m-1 absolute top-0 left-0 flex items-center justify-center text-white opacity-80 bg-[#0002] rounded w-[30px] h-[30px]'>{price}<b className='text-[8px]'>/mm</b></p>
+              <p className='m-1 absolute top-0 right-0 text-white opacity-80 bg-[#0002] rounded w-auto p-1 h-[30px]'>{availability}</p>
+              <p className='absolute text-[#fff9] text-8xl uppercase font-extrabold'>{name}</p>
+              <img  src={image}  alt={name}/>
+            </div>
+          </div>
         ))}
       </div>
       <button
@@ -62,7 +83,7 @@ const Printer = () => {
         style={{ left: 0 }}
         aria-label="View Previous Image"
       >
-        <ArrowBigLeft aria-hidden />
+        <AiOutlineArrowLeft aria-hidden className='opacity-50'/>
       </button>
       <button
         onClick={showNextPrinter}
@@ -70,7 +91,7 @@ const Printer = () => {
         style={{ right: 0 }}
         aria-label="View Next Image"
       >
-        <ArrowBigRight aria-hidden />
+        <AiOutlineArrowRight aria-hidden className='opacity-50'/>
       </button>
       <div
         style={{
@@ -85,14 +106,14 @@ const Printer = () => {
         {printers.map((_, index) => (
           <button
             key={index}
-            className="img-slider-dot-btn"
+            className="img-slider-dot-btn transition-all"
             aria-label={`View Image ${index + 1}`}
-            onClick={() => setImageIndex(index)}
+            onClick={() => setIindex(index)}
           >
-            {index === imageIndex ? (
-              <CircleDot aria-hidden />
+            {index === Iindex ? (
+              <BsFillCircleFill aria-hidden className='opacity-80 transition-all scale-105'/>
             ) : (
-              <Circle aria-hidden />
+              <BsFillCircleFill aria-hidden className='opacity-50 transition-all'/>
             )}
           </button>
         ))}

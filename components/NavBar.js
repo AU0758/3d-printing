@@ -14,7 +14,7 @@ export default function NavBar() {
         </div>
         <div className='flex justify-center items-center'>
           <Link href="./filement" className='flex justify-center items-center transition-all active:contrast-125'>
-            <Image width={30} height={30} src={filementIcon} alt='filement' className='opacity-80 p-1'/>
+            <Image width={30} height={30} src={filementIcon} alt='filement' className='opacity-60 contrast-75 p-1'/>
           </Link>
           <Link href="./printer" className='flex justify-center items-center transition-all active:contrast-125'>
             <Image width={30} height={30} src={printerIcon} alt='printer' className='opacity-80'/>

@@ -4,6 +4,9 @@ const nextConfig = {
       config.resolve.alias['@'] = __dirname;
       return config;
     },
+    experimental: {
+      serverActions: true
+    }
   };
   
 module.exports = nextConfig;

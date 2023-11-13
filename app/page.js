@@ -10,7 +10,7 @@ import Printer from '@/components/sections/Printer.jsx';
 export default function Home() {
 
   return (
-    <main className='w-[100%]  flex justify-stretch'>
+    <section className='w-[100%]  flex justify-stretch'>
       <section className='sticky top-[calc(30px+2.5rem)] bg-[#FFF2] dark:bg-[#0002] flex-1 flex items-center justify-center h-[calc(100vh-30px-2.5rem)]'>
         <div className='absolute left-0 top-0 more'>
           <Image width={30} height={10} src={More} alt='draw' className='m-1 cursor-pointer dropbtn flex'/>
@@ -26,12 +26,12 @@ export default function Home() {
         <Filement />
         <Printer />
         <section id='send' className='flex items-center justify-center h-[calc(100vh-30px-2.5rem)] w-[100%]'>
-
+              
         </section>
         <footer>
 
         </footer>
       </div>
-    </main>
+    </section>
   )
 }
