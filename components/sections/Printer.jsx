@@ -18,8 +18,6 @@ const Printer = () => {
         console.log('Data fetching: %cOK', 'color: green');
         const data = await res.json();
 
-        const path = 'app/tmp/'+data.image
-        
         setPrinters(data.printers);
       } catch (error) {
         console.error('Data fetching: %cFAILED', 'color:red', error);
@@ -69,10 +67,10 @@ const Printer = () => {
           style={{ translate: `${-100 * Iindex}%`, backgroundColor: bg}}
           >
             <div className='flex items-center justify-center flex-col h-[100%]'>
-              <p className='m-1 absolute top-0 left-0 flex items-center justify-center text-white opacity-80 bg-[#0002] rounded w-[30px] h-[30px]'>{price}<b className='text-[8px]'>/mm</b></p>
+              <p className='m-1 absolute top-0 left-0 flex items-center justify-center text-white opacity-80 bg-[#0002] rounded w-[30px] h-[30px]'>{price}<b className='text-[8px]'>/h</b></p>
               <p className='m-1 absolute top-0 right-0 text-white opacity-80 bg-[#0002] rounded w-auto p-1 h-[30px]'>{availability}</p>
-              <p className='absolute text-[#fff9] text-8xl uppercase font-extrabold'>{name}</p>
-              <img  src={image}  alt={name}/>
+              <p className='absolute text-[#fff9] text-8xl uppercase font-extrabold z-1'>{name}</p>
+              <img  src={image}  alt={name} className='z-10 opacity-90 transition-all hover:scale-110 hover:rotate-[-8deg]'/>
             </div>
           </div>
         ))}

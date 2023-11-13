@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { AiOutlineArrowRight } from 'react-icons/ai';
-import { BsFillCircleFill } from "react-icons/bs"
+import { BsFillCircleFill } from "react-icons/bs";
 
-const Filement = () => {
-  const [printers, setPrinters] = useState([]);
+const Printer = () => {
+  const [filements, setFilements] = useState([]);
   const [Iindex, setIindex] = useState(0);
 
   useEffect(() => {
@@ -17,9 +17,11 @@ const Filement = () => {
         console.log('Data fetching: %cOK', 'color: green');
         const data = await res.json();
 
+        console.log(data);
+
         const path = 'app/tmp/'+data.image
         
-        setPrinters(data.printers);
+        setFilements(data.filements);
       } catch (error) {
         console.error('Data fetching: %cFAILED', 'color:red', error);
       }
@@ -30,14 +32,14 @@ const Filement = () => {
 
   function showNextPrinter() {
     setIindex(index => {
-      if (index === printers.length - 1) return 0
+      if (index === filements.length - 1) return 0
       return index + 1
     })
   }
 
   function showPrevPrinter() {
     setIindex(index => {
-      if (index === 0) return printers.length - 1
+      if (index === 0) return filements.length - 1
       return index - 1
     })
   }
@@ -48,7 +50,7 @@ const Filement = () => {
       style={{ width: "50vw", height: "calc(100vh - 30px - 2.5rem)", position: "relative" }}
       
     >
-      {/* <a href="#after-image-slider-controls" className="skip-link">
+      <a href="#after-image-slider-controls" className="skip-link">
         Skip Image Slider Controls
       </a>
       <div
@@ -61,7 +63,7 @@ const Filement = () => {
           alignItems: "center"
         }}
       >
-        {printers.map(({ name, bg, image, price, length }, index) => (
+        {filements.map(({ name, bg, image, price, length }, index) => (
           <div 
           aria-hidden={Iindex !== index}
           className="img-slider-img"
@@ -69,9 +71,9 @@ const Filement = () => {
           >
             <div className='flex items-center justify-center flex-col h-[100%]'>
               <p className='m-1 absolute top-0 left-0 flex items-center justify-center text-white opacity-80 bg-[#0002] rounded w-[30px] h-[30px]'>{price}<b className='text-[8px]'>/mm</b></p>
-              <p className='m-1 absolute top-0 right-0 text-white opacity-80 bg-[#0002] rounded w-auto p-1 h-[30px]'>{availability}</p>
-              <img  src={image}  alt={name}/>
-              {name}
+              <p className='m-1 absolute top-0 right-0 text-white opacity-80 bg-[#0002] rounded w-auto p-1 h-[30px]'>{length}cm</p>
+              <p className='absolute text-[#fff9] text-8xl uppercase font-extrabold z-1'>{name}</p>
+              <img  src={image}  alt={name} className='z-10 opacity-90 transition-all hover:scale-110 hover:rotate-6'/>
             </div>
           </div>
         ))}
@@ -102,7 +104,7 @@ const Filement = () => {
           gap: ".25rem",
         }}
       >
-        {printers.map((_, index) => (
+        {filements.map((_, index) => (
           <button
             key={index}
             className="img-slider-dot-btn transition-all"
@@ -117,9 +119,9 @@ const Filement = () => {
           </button>
         ))}
       </div>
-      <div id="after-image-slider-controls" /> */}
+      <div id="after-image-slider-controls" />
     </section>
   );
 };
 
-export default Filement;
+export default Printer;

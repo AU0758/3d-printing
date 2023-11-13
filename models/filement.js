@@ -6,7 +6,7 @@ const filementSchema = new Schema(
         name: String,
         image: String,
         bg: String,
-        lenght: Number,
+        length: Number,
     }
 );
 const Filement = mongoose.models.Filement||mongoose.model("Filement", filementSchema);

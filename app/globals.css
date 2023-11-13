@@ -7,7 +7,7 @@
 }
 
 body{
-  @apply bg-[#ce994f] dark:bg-[#ff9100]
+  @apply bg-[#e0e0e0] dark:bg-[#222222]
 }
 
 .material:hover {
@@ -123,6 +123,7 @@ body{
 
   .img-slider-btn:hover > *,
   .img-slider-btn:focus-visible > * {
+    fill: white;
     animation: squish 200ms ease-in-out;
     opacity: 0.8;
   }

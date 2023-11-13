@@ -3,8 +3,10 @@ import More from '@/public/more.svg';
 import Draw from '@/public/draw.svg';
 import Cube from '@/public/3d.svg';
 
-import Filement from '@/components/sections/Filement';
+import Filement from '@/components/sections/Filement.jsx';
 import Printer from '@/components/sections/Printer.jsx';
+import FileUpload from '@/components/sections/3DUpload.jsx';
+import ThreeDModel from './input/3DModel.js';
 
 
 export default function Home() {
@@ -19,17 +21,22 @@ export default function Home() {
             <Image width={30} height={30} src={Cube} alt='text'/>
             <p className='font-serif text-[20px]'>T</p>
           </div>
+          
         </div>
-        dadwd
       </section>
       <div className='flex-1'>
         <Filement />
         <Printer />
-        <section id='send' className='flex items-center justify-center h-[calc(100vh-30px-2.5rem)] w-[100%]'>
-              
-        </section>
-        <footer>
-
+        <footer className='flex text-[#fff9] text-2xl uppercase font-extrabold '>
+          <p className='text-8xl m-1'>#</p>
+          <div className='flex flex-col justify-between'>
+            <p className='m-1'>Made By 000</p>
+            <div>
+              <a className='m-1' href='https://twitter.com/Nori002sa'>Twitter</a>
+              <a className='m-1' href='https://www.youtube.com/channel/UCSWoicWel0PjDG56-9Gj_oQ'>Youtube</a>
+              <a className='m-1' href='https://github.com/AU0758'>Github</a>
+            </div>
+          </div>
         </footer>
       </div>
     </section>
