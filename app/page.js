@@ -5,12 +5,12 @@ import Cube from '@/public/3d.svg';
 
 import Filement from '@/components/sections/Filement.jsx';
 import Printer from '@/components/sections/Printer.jsx';
-import FileUpload from '@/components/sections/3DUpload.jsx';
-import ThreeDModel from './input/3DModel.js';
+import Model from '@/components/sections/Model.jsx';
 
+
+// TODO: Make form for 3d Model and use the THREE.js component path: @/components/THREE.js
 
 export default function Home() {
-
   return (
     <section className='w-[100%]  flex justify-stretch'>
       <section className='sticky top-[calc(30px+2.5rem)] bg-[#FFF2] dark:bg-[#0002] flex-1 flex items-center justify-center h-[calc(100vh-30px-2.5rem)]'>
@@ -21,8 +21,8 @@ export default function Home() {
             <Image width={30} height={30} src={Cube} alt='text'/>
             <p className='font-serif text-[20px]'>T</p>
           </div>
-          
         </div>
+        <Model />
       </section>
       <div className='flex-1'>
         <Filement />

@@ -112,9 +112,9 @@ const Printer = () => {
             onClick={() => setIindex(index)}
           >
             {index === Iindex ? (
-              <BsFillCircleFill aria-hidden className='opacity-80 transition-all scale-105'/>
+              <BsFillCircleFill aria-hidden className='opacity-80 transition-all scale-105 hover:fill-white'/>
             ) : (
-              <BsFillCircleFill aria-hidden className='opacity-50 transition-all'/>
+              <BsFillCircleFill aria-hidden className='opacity-50 transition-all hover:fill-white'/>
             )}
           </button>
         ))}
