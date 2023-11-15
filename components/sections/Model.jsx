@@ -9,6 +9,7 @@ import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
 import { ColladaLoader } from 'three/examples/jsm/loaders/ColladaLoader';
 import { PLYLoader } from 'three/examples/jsm/loaders/PlyLoader';
 import { ObjectLoader } from 'three/src/loaders/ObjectLoader';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const Model = () => {
   const fileInputRef = useRef(null);
@@ -20,20 +21,31 @@ const Model = () => {
   useEffect(() => {
     cameraRef.current.position.z = 5;
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(1, 1, 1).normalize();
-    sceneRef.current.add(directionalLight);
 
+    const directionalLight = new THREE.DirectionalLight(0x666666, 0.6);
+    directionalLight.position.set(1, 1, 1);
+    sceneRef.current.add(directionalLight);
     sceneRef.current.add(groupRef.current);
 
     const renderer = new THREE.WebGLRenderer();
+
+    const controls = new OrbitControls(cameraRef.current, renderer.domElement);
+    controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+    controls.dampingFactor = 0.25;
+    controls.screenSpacePanning = false;
+    controls.maxPolarAngle = Math.PI / 2;
+
     updateRendererSize(renderer);
     window.addEventListener('resize', () => updateRendererSize(renderer));
     canvasRef.current.appendChild(renderer.domElement);
 
     const animate = () => {
-      requestAnimationFrame(animate);
-      renderer.render(sceneRef.current, cameraRef.current);
+        requestAnimationFrame(animate);
+      
+        // Add this line to update controls in the animation loop
+        controls.update();
+      
+        renderer.render(sceneRef.current, cameraRef.current);
     };
 
     animate();
@@ -48,7 +60,7 @@ const Model = () => {
     const newWidth = 400;
     const newHeight = 400;
 
-    cameraRef.current.aspect = (newWidth/2) / newHeight;
+    cameraRef.current.aspect = 1;
     cameraRef.current.updateProjectionMatrix();
 
     renderer.setSize(newWidth, newHeight);
@@ -58,12 +70,13 @@ const Model = () => {
     const file = event.target.files[0];
   
     const reader = new FileReader();
-    const material = new THREE.MeshStandardMaterial(); // Change to MeshStandardMaterial
   
     reader.onload = function () {
       let loader = null;
+  
 
       switch (file.name.split('.').pop().toLowerCase()) {
+        case 'glb':
         case 'gltf':
           loader = new GLTFLoader();
           break;
@@ -94,7 +107,7 @@ const Model = () => {
         // Path to the GLTF file
         URL.createObjectURL(file),
         (gltf) => {
-          const mesh = new THREE.Mesh(gltf.scene.children[0].geometry, material);
+          const mesh = new THREE.Mesh(gltf.scene.children[0].geometry, new THREE.MeshStandardMaterial()); // Use basic material
           mesh.castShadow = true;
           mesh.receiveShadow = true;
           groupRef.current.add(mesh);
@@ -108,7 +121,7 @@ const Model = () => {
       );
     };
   
-    reader.readAsArrayBuffer(file);
+    reader.readAsText(file);
   };
 
   return (
